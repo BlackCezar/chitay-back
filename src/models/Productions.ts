@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 import IHelperModel from '../interfaces/helper'
 
-const subjectSchema: Schema = new Schema({
+const productionSchema: Schema = new Schema({
     name: {
         type: String,
         required: true
@@ -10,4 +10,4 @@ const subjectSchema: Schema = new Schema({
     timestamps: true
 })
 
-export default mongoose.model<IHelperModel>('Subjects', subjectSchema)
+export default mongoose.model<IHelperModel>('Productions', productionSchema)

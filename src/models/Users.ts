@@ -17,17 +17,9 @@ const userSchema: Schema = new Schema({
     },
     role: {
         type: String,
-        enum: ['Student', 'Teacher', 'Parent', 'Admin', 'Deputy', 'ClassRoomTeacher'],
+        enum: ['User', 'Admin'],
         required: true
     },
-    phone: String,
-    birthdate: Date,
-    parent: {
-        type: Schema.Types.ObjectId,
-        ref: 'Users',
-        required: false
-    },
-    address: String
 }, {
     timestamps: true
 })

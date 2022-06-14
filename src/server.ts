@@ -20,12 +20,10 @@ declare module 'express-session' {
 }
 
 import usersRouter from './routes/users'
-import groupsRouter from './routes/groups'
-import lessonsRouter from './routes/lessons'
-import gradesRouter from './routes/grades'
-import pointsRouter from './routes/points'
-import subjectsRouter from './routes/subjects'
-import classroomsRouter from './routes/classrooms'
+import productionsRouter from './routes/productions'
+import categoriesRouter from './routes/categories'
+import ordersRouter from './routes/orders'
+import productsRouter from './routes/products'
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
@@ -41,12 +39,10 @@ app.use(
   }))
 
 app.use('/api/users', usersRouter)
-app.use('/api/groups', groupsRouter)
-app.use('/api/lessons', lessonsRouter)
-app.use('/api/grades', gradesRouter)
-app.use('/api/points', pointsRouter)
-app.use('/api/subjects', subjectsRouter)
-app.use('/api/classrooms', classroomsRouter)
+app.use('/api/products', productsRouter)
+app.use('/api/orders', ordersRouter)
+app.use('/api/categories', categoriesRouter)
+app.use('/api/productions', productionsRouter)
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
