@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import Users from "./models/Users";
 import IUser from './interfaces/users';
 import bcrypt from 'bcrypt'
+import serveStatic from 'serve-static'
 dotenv.config();
 
 const app: Express = express();
@@ -24,6 +25,7 @@ import productionsRouter from './routes/productions'
 import categoriesRouter from './routes/categories'
 import ordersRouter from './routes/orders'
 import productsRouter from './routes/products'
+import path from 'path';
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
@@ -43,7 +45,7 @@ app.use('/api/products', productsRouter)
 app.use('/api/orders', ordersRouter)
 app.use('/api/categories', categoriesRouter)
 app.use('/api/productions', productionsRouter)
-
+app.use(serveStatic(path.join(__dirname, 'uploads')))
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
   start()

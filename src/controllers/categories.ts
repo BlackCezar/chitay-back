@@ -4,7 +4,7 @@ import Categories from '../models/Categories'
 
 const get = async (req: Request, res: Response) => {
 	const id = req.params.id || ''
-	const object = await Categories.findOne({_id: new Types.ObjectId(id)})
+	const object = await Categories.findOne({_id: new Types.ObjectId(id)}).populate('parent')
 
 	res.json({
 		code: 0,
@@ -13,9 +13,13 @@ const get = async (req: Request, res: Response) => {
 }
 
 const list = async (req: Request, res: Response) => {
-	const array = await Categories.find({
-		...req.params
-	}).populate('parent').exec()
+	let params = req.query
+	// @ts-ignore
+	if (params.title) params.title = {$regex: params.title}
+	// @ts-ignore
+	if (params.categories) params.categories = {$contains: params.categories}
+console.log(params)
+	const array = await Categories.find(params).populate('parent').exec()
 
 	res.json({
 		code: 0,

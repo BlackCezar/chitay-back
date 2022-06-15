@@ -26,8 +26,7 @@ const list = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
 	try {
 		const object = await Orders.create({
-			name: req.params.name,
-			parent: req.params.parent
+			...req.body
 		})
 	
 		res.json({

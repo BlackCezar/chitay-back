@@ -26,8 +26,7 @@ const list = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
 	try {
 		const object = await Productions.create({
-			name: req.params.name,
-			parent: req.params.parent
+			name: req.body.name
 		})
 	
 		res.json({
@@ -35,6 +34,7 @@ const create = async (req: Request, res: Response) => {
 			object
 		})
 	} catch (err) {
+		console.log(err)
 		res.json({
 			code: 400,
 			message: 'Ошибка при создании'

@@ -11,6 +11,8 @@ const orderSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users'
     },
+    phone: String,
+    address: String,
     products: {
         type: [{
             qty: Number,
