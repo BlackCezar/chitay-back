@@ -15,6 +15,7 @@ export default interface IBook extends Document{
     price: number,
     categories: Types.ObjectId,
     production: Types.ObjectId,
+	images: [string],
     quantity: number,
 	createdAt?: boolean | string,
 	updatedAt?: boolean | string

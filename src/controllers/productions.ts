@@ -3,7 +3,8 @@ import {Types} from 'mongoose'
 import Productions from '../models/Productions'
 
 const get = async (req: Request, res: Response) => {
-	const object = await Productions.findOne({_id: new Types.ObjectId(req.params.id)})
+	const id = new Types.ObjectId(req.params.id)
+	const object = await Productions.findOne({_id: id})
 
 	res.json({
 		code: 0,
@@ -42,8 +43,9 @@ const create = async (req: Request, res: Response) => {
 }
 
 const remove = async (req: Request, res: Response) => {
+	const id = new Types.ObjectId(req.params.id)
 	const object = await Productions.deleteOne({
-		_id: new Types.ObjectId(req.params.id)
+		_id: id
 	})
 
 	res.json({

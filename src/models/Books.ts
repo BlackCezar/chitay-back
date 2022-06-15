@@ -24,7 +24,8 @@ const bookSchema: Schema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Productions'
     },
-    quantity: Number
+    quantity: Number,
+    images: [String]
 }, {
     timestamps: true
 })

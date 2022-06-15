@@ -4,7 +4,8 @@ import Users from './../models/Users'
 import bcrypt from 'bcrypt'
 
 const get = async (req: Request, res: Response) => {
-	const user = await Users.findOne({_id: new Types.ObjectId(req.params.id)})
+	const id = new Types.ObjectId(req.params.id)
+	const user = await Users.findOne({_id: id})
 
 	res.json({
 		code: 0,

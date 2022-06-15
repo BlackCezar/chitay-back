@@ -3,7 +3,8 @@ import {Types} from 'mongoose'
 import Categories from '../models/Categories'
 
 const get = async (req: Request, res: Response) => {
-	const object = await Categories.findOne({_id: new Types.ObjectId(req.params.id)})
+	const id = req.params.id || ''
+	const object = await Categories.findOne({_id: new Types.ObjectId(id)})
 
 	res.json({
 		code: 0,
@@ -14,7 +15,7 @@ const get = async (req: Request, res: Response) => {
 const list = async (req: Request, res: Response) => {
 	const array = await Categories.find({
 		...req.params
-	}).exec()
+	}).populate('parent').exec()
 
 	res.json({
 		code: 0,
@@ -25,8 +26,8 @@ const list = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
 	try {
 		const object = await Categories.create({
-			name: req.params.name,
-			parent: req.params.parent
+			name: req.body.name,
+			parent: req.body.parent ? req.body.parent : undefined 
 		})
 	
 		res.json({
@@ -34,6 +35,7 @@ const create = async (req: Request, res: Response) => {
 			object
 		})
 	} catch (err) {
+		console.log(err)
 		res.json({
 			code: 400,
 			message: 'Ошибка при создании'
@@ -42,8 +44,10 @@ const create = async (req: Request, res: Response) => {
 }
 
 const remove = async (req: Request, res: Response) => {
+	const id = req.params.id || ''
+
 	const object = await Categories.deleteOne({
-		_id: new Types.ObjectId(req.params.id)
+		_id: new Types.ObjectId(id)
 	})
 
 	res.json({
@@ -54,7 +58,6 @@ const remove = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
 	try {
-
 		const id = new Types.ObjectId(req.params.id)
 
 
