@@ -39,10 +39,13 @@ type ImagePath = {
 const create = async (req: Request, res: Response) => {
 	const data = JSON.parse(req.body.json)
 	const files = req.files as Array<ImagePath>
+	console.log(files)
 
 	try {
 		const object = await Products.create({
-			...data, images: files.map(f => f.path)
+			...data, images: files.map(f => {
+				return `/imgs/uploads/${f.filename}`
+			})
 		})
 	
 		res.json({
@@ -73,7 +76,6 @@ const remove = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
 	try {
-
 		const id = new Types.ObjectId(req.params.id)
 
 
